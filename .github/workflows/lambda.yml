@@ -13,10 +13,10 @@ jobs:
     steps: 
       - uses: actions/checkout@v2
 
-      - names: Set up Python # sets up our python env
+      - name: Set up Python # sets up our python env
         uses: actions/setup-python@v2
         with: 
-          python-verison: '3.13'
+          python-verison: '3.12'
 
       - name: Install Dependencies # Installs any packages
         run: |
@@ -27,7 +27,7 @@ jobs:
         uses: aws-action/configure-aws-credentials@v1
         with: 
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secret.AWS_SECRET_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
       
       - name: Deploy Lambda Function #Zips lambda directory and updates lambda function
@@ -35,5 +35,4 @@ jobs:
         cd lambda
         zip -r lambda.zip
         aws lambda update-funtion-code --function-name my test-cicd-lambda --zip-file fileb://lambda.zip
-
-    
+      
