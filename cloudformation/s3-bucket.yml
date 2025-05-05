@@ -4,7 +4,7 @@ Description: "S3 bucket for our CICD PR"
 Parameters: 
   Environment: 
     Type: String
-    Defualt: Test
+    Default: test     # ✅ fixed typo here
     AllowedValues: 
       - test
       - staging 
@@ -14,12 +14,16 @@ Resources:
   MyS3Bucket: 
     Type: 'AWS::S3::Bucket'
     Properties: 
-      BucketName: !Sub '${AWS:StackName}-${Environment}-bucket'
-    Tags: 
-      - Key: Environment
-        Value: !Ref Environment
+      BucketName: !Sub '${AWS::StackName}-${Environment}-bucket'
+      Tags: 
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Project
+          Value: GithubActionsTesting
 
-  Outputs: 
-    Bucketname: 
-      Description: 'Name of created S3 Bucket'
-      Value: !Ref MyS3Bucket
+Outputs: 
+  BucketName: 
+    Description: 'Name of the created S3 bucket'
+    Value: !Ref MyS3Bucket
+
+      
