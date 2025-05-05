@@ -4,7 +4,7 @@ Description: "S3 bucket for our CICD PR"
 Parameters: 
   Environment: 
     Type: String
-    Defualt: Test
+    Default: Test
     AllowedValues: 
       - test
       - staging 
